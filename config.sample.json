@@ -1,0 +1,6 @@
+{
+    "exchange": "test_topic",
+    "url": "http://localhost:8080",
+    "username": "guest",
+    "password": "guest"
+}
