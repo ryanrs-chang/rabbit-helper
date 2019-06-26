@@ -1,5 +1,5 @@
 {
-    "name": "rabbitmq_client",
+    "name": "rabbit-helper",
     "version": "1.0.0",
     "bin": "app.js",
     "description": "",

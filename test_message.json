@@ -1,0 +1,5 @@
+{
+    "method": "get",
+    "action": "/service/list",
+    "body": {}
+}

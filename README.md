@@ -1,5 +1,10 @@
 # RabbitMQ Helper
 
+1. `git clone this_repository`
+2. `cd ./this_repository`
+3. `npm link`
+4. `rabbitmq_client --help`
+
 # set environment
 
 1. `RABBITMQ_CONFIG`
@@ -86,22 +91,64 @@ Options:
 rabbitmq_client delete -N api-server-gen-0tDcMewEEt.1557718602
 ```
 
-### mulple delete by regex
+### multiple delete by regex
 
-Example: delete prefix is `api-server-gen-T`
-
-```shell=
-rabbitmq_client delete -e "api-server-gen-T"
-```
-
-Example: delete prefix is `api-server-gen`
+**Example**: delete prefix is `api-server-gen-T`
 
 ```shell=
 rabbitmq_client delete -e "api-server-gen-T"
 ```
 
-Example: multiple regexp
+**Example**: delete prefix is `api-server-gen`
+
+```shell=
+rabbitmq_client delete -e "api-server-gen-T"
+```
+
+**Example**: multiple regexp
 
 ```shell=
 rabbitmq_client delete -e "api-server-gen-T" "api-server-gen-v"
+```
+
+## publish messag to queue
+
+```
+Usage: publish [options] <routing_key> [others_option]
+
+publish message to exchange
+
+Options:
+  -e, --exchange <string>  assign exchange for publish
+  -f, --file <string>      set file path
+  -m, --message <string>   set publish message
+  -h, --help               output usage information
+```
+
+**Example**: publish `string` type message
+
+```shell=
+rabbitmq_client publish routing_key -m 'string_type_message'
+```
+
+**Example**: publish message form file
+
+`cat ./test_message.json`
+
+```
+{
+    "method": "get",
+    "action": "/service/list",
+    "body": {}
+}
+```
+
+```shell=
+rabbitmq_client publish routing_key -f ./test_message.json
+```
+
+**Example**: assign an `exchange` instead of the `default exchange`
+
+```shell=
+rabbitmq_client publish routing_key -m 'test_string_message'
 ```
