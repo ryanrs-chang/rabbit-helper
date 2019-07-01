@@ -3,7 +3,7 @@
 1. `git clone this_repository`
 2. `cd ./this_repository`
 3. `npm link`
-4. `rabbitmq_client --help`
+4. `rabbit-helper --help`
 
 # set environment
 
@@ -20,35 +20,35 @@
 }
 ```
 
-you can put it in `~/.rabbitmd_client`, then export it `export RABBITMQ_CONFIG=~/.rabbitmd_client/config.json`
+you can put it in `~/.rabbit-helper`, then export it `export RABBITMQ_CONFIG=~/.rabbit-helper/config.json`
 
 ---
 
 ```
-mkdir -p ~/.rabbitmq_client
+mkdir -p ~/.rabbit-helper
 
 echo '{
     "exchange": "test_topic",
     "url": "http://localhost:8080",
     "username": "guest",
     "password": "guest"
-}' > ~/.rabbitmq_client/config.json
+}' > ~/.rabbit-helper/config.json
 
-export RABBITMQ_CONFIG=~/.rabbitmd_client/config.json
+export RABBITMQ_CONFIG=~/.rabbit-helper/config.json
 
 # check file content and variable
 echo $RABBITMQ_CONFIG
-cat ~/.rabbitmq_client/config.json
+cat ~/.rabbit-helper/config.json
 ```
 
 # How to use
 
--   check version: `rabbitmq_client -V`
--   manual: `rabbitmq_client --help`
+-   check version: `rabbit-helper -V`
+-   manual: `rabbit-helper --help`
 
 ## list all queue
 
-`rabbitmq_client list`
+`rabbit-helper list`
 
 ```shell=
 [ '1456',
@@ -72,7 +72,7 @@ cat ~/.rabbitmq_client/config.json
 
 ## delete queue
 
-`rabbitmq_client delete --help`
+`rabbit-helper delete --help`
 
 ```shell=
 Usage: delete [options] <queue_name> [other_queue_names...]
@@ -88,7 +88,7 @@ Options:
 ### assign `queue_name`
 
 ```shell=
-rabbitmq_client delete -N api-server-gen-0tDcMewEEt.1557718602
+rabbit-helper delete -N api-server-gen-0tDcMewEEt.1557718602
 ```
 
 ### multiple delete by regex
@@ -96,19 +96,19 @@ rabbitmq_client delete -N api-server-gen-0tDcMewEEt.1557718602
 **Example**: delete prefix is `api-server-gen-T`
 
 ```shell=
-rabbitmq_client delete -e "api-server-gen-T"
+rabbit-helper delete -e "api-server-gen-T"
 ```
 
 **Example**: delete prefix is `api-server-gen`
 
 ```shell=
-rabbitmq_client delete -e "api-server-gen-T"
+rabbit-helper delete -e "api-server-gen-T"
 ```
 
 **Example**: multiple regexp
 
 ```shell=
-rabbitmq_client delete -e "api-server-gen-T" "api-server-gen-v"
+rabbit-helper delete -e "api-server-gen-T" "api-server-gen-v"
 ```
 
 ## publish messag to queue
@@ -128,7 +128,7 @@ Options:
 **Example**: publish `string` type message
 
 ```shell=
-rabbitmq_client publish routing_key -m 'string_type_message'
+rabbit-helper publish routing_key -m 'string_type_message'
 ```
 
 **Example**: publish message form file
@@ -144,11 +144,11 @@ rabbitmq_client publish routing_key -m 'string_type_message'
 ```
 
 ```shell=
-rabbitmq_client publish routing_key -f ./test_message.json
+rabbit-helper publish routing_key -f ./test_message.json
 ```
 
 **Example**: assign an `exchange` instead of the `default exchange`
 
 ```shell=
-rabbitmq_client publish routing_key -m 'test_string_message'
+rabbit-helper publish routing_key -m 'test_string_message'
 ```
